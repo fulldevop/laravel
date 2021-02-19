@@ -75,11 +75,17 @@
             </div>
         </div>
     </nav>
-    @yield('breadcrumbs')
 </header>
 
 <main class="app-content py-4">
     <div class="container">
+        @section('breadcrumbs')
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item active">Home</li>
+            </ul>
+        @show
+
+        @include('layouts.partials.flash')
         @yield('content')
     </div>
 </main>
