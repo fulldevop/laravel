@@ -14,9 +14,17 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::get('/register', 'Auth\RegisterController@register')->name('register');
+
+Route::get('/password/reset', function () {
+    return view('auth.passwords.reset');
+})->name('password.request');
 
 Auth::routes();
 

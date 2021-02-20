@@ -79,12 +79,8 @@
 
 <main class="app-content py-4">
     <div class="container">
-        @section('breadcrumbs')
-            <ul class="breadcrumb">
-                <li class="breadcrumb-item active">Home</li>
-            </ul>
-        @show
-
+        @section('breadcrumbs', Breadcrumbs::render())
+        @yield('breadcrumbs')
         @include('layouts.partials.flash')
         @yield('content')
     </div>
