@@ -20,7 +20,8 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::get('/register', 'Auth\RegisterController@register')->name('register');
+Route::get('/register', 'Auth\RegisterController@form')->name('register');
+Route::post('/register', 'Auth\RegisterController@register');
 
 Route::get('/password/reset', function () {
     return view('auth.passwords.reset');
