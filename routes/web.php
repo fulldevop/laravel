@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Auth::routes();
+
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
@@ -27,6 +29,6 @@ Route::get('/password/reset', function () {
     return view('auth.passwords.reset');
 })->name('password.request');
 
-Auth::routes();
+Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
 
 Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');

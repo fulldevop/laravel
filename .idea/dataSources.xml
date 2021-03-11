@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="homestead@localhost" uuid="6c951155-e277-400f-8cf0-8c20f8aff1eb">
+    <data-source source="LOCAL" name="site@localhost" uuid="19e2d930-0054-4ce5-a059-4262284716ca">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3308/homestead</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="laravel@localhost" uuid="1a4fe789-e321-4e46-8a9d-979dc1ea871d">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/laravel</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/site</jdbc-url>
       <driver-properties>
         <property name="serverTimezone" value="UTC" />
       </driver-properties>

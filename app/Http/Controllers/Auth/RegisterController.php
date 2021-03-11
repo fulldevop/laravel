@@ -14,8 +14,6 @@ use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
-    use RegistersUsers;
-
     protected $redirectTo = '/cabinet';
 
     public function __construct()
@@ -51,5 +49,23 @@ class RegisterController extends Controller
 
         return redirect()->route('login')
             ->with('success', 'Check your email and click on the link to verify.');
+    }
+
+    protected function verify($token)
+    {
+        if (!$user = User::where('verify_token', $token)->first()) {
+            return redirect()->route('login')
+                ->with('error', 'Sorry your link cannot be identified.');
+        }
+
+        if ($user->status !== User::STATUS_WAIT) {
+            return redirect()->route('login')->with('error', 'Your e-mail is already verified.');
+        }
+
+        $user->status = User::STATUS_ACTIVE;
+        $user->verify_token = null;
+        $user->save();
+
+        return redirect()->route('login')->with('success', 'Your e-mail is verified. You can now login.');
     }
 }
