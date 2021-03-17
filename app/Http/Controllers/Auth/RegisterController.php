@@ -3,22 +3,45 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\VerifyMail;
-use App\User;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Mail\Auth\VerifyMail;
+use App\Entity\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
-    protected $redirectTo = '/cabinet';
-
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
+    }
+
+    public function register(RegisterRequest $request)
+    {
+        $user = User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+            'verify_token' => Str::random(),
+            'status' => User::STATUS_WAIT,
+        ]);
+
+        Mail::to($user->email)->send(new VerifyMail($user));
+        event(new Registered($user));
+
+        return redirect()->route('login')
+            ->with('success', 'Check your email and click on the link to verify.');
     }
 
     protected function validator(array $data)
@@ -28,27 +51,6 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
-    }
-
-    protected function create(array $data)
-    {
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'verify_token' => Str::random(),
-            'status' => User::STATUS_WAIT,
-        ]);
-
-        Mail::to($user->email)->send(new VerifyMail($user));
-    }
-
-    protected function registered(Request $request, $user)
-    {
-        $this->guard()->logout();
-
-        return redirect()->route('login')
-            ->with('success', 'Check your email and click on the link to verify.');
     }
 
     protected function verify($token)

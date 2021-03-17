@@ -22,7 +22,7 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::get('/register', 'Auth\RegisterController@form')->name('register');
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('/register', 'Auth\RegisterController@register');
 
 Route::get('/password/reset', function () {
@@ -32,3 +32,16 @@ Route::get('/password/reset', function () {
 Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
 
 Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
+
+Route::group(
+    [
+        'prefix' => 'admin',// в url
+        'as' => 'admin.',// для ->name
+        'namespace' => 'Admin',// перед Controller
+        'middleware' => ['auth'],
+    ],
+    function () {
+        Route::get('/', 'HomeController@index')->name('home');
+        Route::resource('users', 'UsersController');
+    }
+);

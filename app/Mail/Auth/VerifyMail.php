@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\Auth;
 
-use App\User;
+use App\Entity\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -33,6 +33,6 @@ class VerifyMail extends Mailable
     {
         return $this
             ->subject('Signup Confirmation')
-            ->markdown('emails.auth.register.confirm');
+            ->markdown('emails.auth.register.verify');
     }
 }

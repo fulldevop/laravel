@@ -1,19 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Cabinet;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        $this->middleware('auth');// Чтобы в кабинет попадали только залогиненые пользователи
+//        $this->middleware('auth');
     }
 
     /**
