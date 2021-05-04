@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.30.1.
+ * Generated for Laravel 7.30.4.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1695,7 +1695,7 @@
                     /**
          * Get the currently authenticated user.
          *
-         * @return \App\User|null 
+         * @return \App\Entity\User|null 
          * @static 
          */ 
         public static function user()
@@ -1730,7 +1730,7 @@
          * Log the given user ID into the application without sessions or cookies.
          *
          * @param mixed $id
-         * @return \App\User|false 
+         * @return \App\Entity\User|false 
          * @static 
          */ 
         public static function onceUsingId($id)
@@ -1794,7 +1794,7 @@
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \App\User|false 
+         * @return \App\Entity\User|false 
          * @static 
          */ 
         public static function loginUsingId($id, $remember = false)
@@ -1867,7 +1867,7 @@
                     /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \App\User 
+         * @return \App\Entity\User 
          * @static 
          */ 
         public static function getLastAttempted()
@@ -1969,7 +1969,7 @@
                     /**
          * Return the currently cached user.
          *
-         * @return \App\User|null 
+         * @return \App\Entity\User|null 
          * @static 
          */ 
         public static function getUser()
@@ -2015,7 +2015,7 @@
                     /**
          * Determine if current user is authenticated. If not, throw an exception.
          *
-         * @return \App\User 
+         * @return \App\Entity\User 
          * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */ 
@@ -9531,7 +9531,7 @@
                         return $instance->getAcceptableContentTypes();
         }
                     /**
-         * Returns true if the request is a XMLHttpRequest.
+         * Returns true if the request is an XMLHttpRequest.
          * 
          * It works if your JavaScript library sets an X-Requested-With HTTP header.
          * It is known to work with common JavaScript frameworks:
@@ -14224,6 +14224,23 @@
         class Str {
          
     }
+            /**
+     * 
+     *
+     */ 
+        class Collection {
+                    /**
+         * 
+         *
+         * @see \Barryvdh\Debugbar\ServiceProvider::register()
+         * @static 
+         */ 
+        public static function debug()
+        {
+                        return \Illuminate\Support\Collection::debug();
+        }
+         
+    }
      
 }
 
@@ -15217,6 +15234,149 @@
         {
                         /** @var \Facade\FlareClient\Flare $instance */
                         return $instance->group($groupName, $properties);
+        }
+         
+    }
+     
+}
+
+    namespace Laracasts\Flash { 
+            /**
+     * 
+     *
+     */ 
+        class Flash {
+                    /**
+         * Flash an information message.
+         *
+         * @param string|null $message
+         * @return \Laracasts\Flash\FlashNotifier 
+         * @static 
+         */ 
+        public static function info($message = null)
+        {
+                        /** @var \Laracasts\Flash\FlashNotifier $instance */
+                        return $instance->info($message);
+        }
+                    /**
+         * Flash a success message.
+         *
+         * @param string|null $message
+         * @return \Laracasts\Flash\FlashNotifier 
+         * @static 
+         */ 
+        public static function success($message = null)
+        {
+                        /** @var \Laracasts\Flash\FlashNotifier $instance */
+                        return $instance->success($message);
+        }
+                    /**
+         * Flash an error message.
+         *
+         * @param string|null $message
+         * @return \Laracasts\Flash\FlashNotifier 
+         * @static 
+         */ 
+        public static function error($message = null)
+        {
+                        /** @var \Laracasts\Flash\FlashNotifier $instance */
+                        return $instance->error($message);
+        }
+                    /**
+         * Flash a warning message.
+         *
+         * @param string|null $message
+         * @return \Laracasts\Flash\FlashNotifier 
+         * @static 
+         */ 
+        public static function warning($message = null)
+        {
+                        /** @var \Laracasts\Flash\FlashNotifier $instance */
+                        return $instance->warning($message);
+        }
+                    /**
+         * Flash a general message.
+         *
+         * @param string|null $message
+         * @param string|null $level
+         * @return \Laracasts\Flash\FlashNotifier 
+         * @static 
+         */ 
+        public static function message($message = null, $level = null)
+        {
+                        /** @var \Laracasts\Flash\FlashNotifier $instance */
+                        return $instance->message($message, $level);
+        }
+                    /**
+         * Flash an overlay modal.
+         *
+         * @param string|null $message
+         * @param string $title
+         * @return \Laracasts\Flash\FlashNotifier 
+         * @static 
+         */ 
+        public static function overlay($message = null, $title = 'Notice')
+        {
+                        /** @var \Laracasts\Flash\FlashNotifier $instance */
+                        return $instance->overlay($message, $title);
+        }
+                    /**
+         * Add an "important" flash to the session.
+         *
+         * @return \Laracasts\Flash\FlashNotifier 
+         * @static 
+         */ 
+        public static function important()
+        {
+                        /** @var \Laracasts\Flash\FlashNotifier $instance */
+                        return $instance->important();
+        }
+                    /**
+         * Clear all registered messages.
+         *
+         * @return \Laracasts\Flash\FlashNotifier 
+         * @static 
+         */ 
+        public static function clear()
+        {
+                        /** @var \Laracasts\Flash\FlashNotifier $instance */
+                        return $instance->clear();
+        }
+                    /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Laracasts\Flash\FlashNotifier::macro($name, $macro);
+        }
+                    /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Laracasts\Flash\FlashNotifier::mixin($mixin, $replace);
+        }
+                    /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Laracasts\Flash\FlashNotifier::hasMacro($name);
         }
          
     }
@@ -18301,6 +18461,7 @@ namespace  {
             class Debugbar extends \Barryvdh\Debugbar\Facade {}
             class Breadcrumbs extends \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
+            class Flash extends \Laracasts\Flash\Flash {}
      
 }
 

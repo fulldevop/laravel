@@ -29,7 +29,7 @@ Route::get('/password/reset', function () {
     return view('auth.passwords.reset');
 })->name('password.request');
 
-Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
+Route::get('/verify/{token}?', 'Auth\RegisterController@verify')->name('register.verify');
 
 Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
 

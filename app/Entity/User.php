@@ -5,6 +5,13 @@ namespace App\Entity;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $status
+ * @property string $verify_token
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -17,7 +24,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
+    protected $fillable = [//Массовое заполнение при update, create и т.п.
         'name', 'email', 'password',
     ];
 
